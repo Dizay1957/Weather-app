@@ -1,5 +1,9 @@
 # How to Add Environment Variables in Vercel
 
+## ⚠️ Important: Don't Commit .env File
+
+**Never commit your `.env` file to GitHub!** It's already in `.gitignore` for security. Instead, add environment variables directly in Vercel.
+
 ## Quick Steps to Fix "API key is missing" Error
 
 ### Step 1: Get Your API Key
@@ -68,10 +72,15 @@ Vercel Dashboard
 3. **Check deployment logs** - In Vercel, go to your deployment → "Build Logs" to see if there are errors
 4. **Redeploy** - Make sure you redeployed after adding the variable
 
+## Alternative: Using Vercel CLI
+
+If you prefer command line, see `VERCEL_CLI_SETUP.md` for instructions on using Vercel CLI to set environment variables.
+
 ## Need Help?
 
 If you're still having issues:
 1. Check Vercel's documentation: [Environment Variables](https://vercel.com/docs/concepts/projects/environment-variables)
 2. Verify your API key is active on OpenWeatherMap
 3. Make sure you're looking at the correct project in Vercel
+4. **Remember**: You must redeploy after adding environment variables!
 
