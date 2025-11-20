@@ -197,7 +197,7 @@ export interface WeatherData {
 // Fonction pour obtenir les coordonnées d'une ville
 export async function getCityCoordinates(city: string): Promise<{ lat: number; lon: number; name: string }> {
   if (!API_KEY) {
-    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your .env file');
+    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your Vercel environment variables (Settings → Environment Variables). See VERCEL_ENV_SETUP.md for instructions.');
   }
 
   try {
@@ -246,7 +246,7 @@ export async function getOneCallWeather(
   exclude?: string[]
 ): Promise<OneCallResponse> {
   if (!API_KEY) {
-    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your .env file');
+    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your Vercel environment variables (Settings → Environment Variables). See VERCEL_ENV_SETUP.md for instructions.');
   }
 
   try {
@@ -299,7 +299,7 @@ export async function getCityWeather(city: string): Promise<OneCallResponse & { 
 // Fonctions de compatibilité avec l'ancien code (pour transition en douceur)
 export async function getCurrentWeather(city: string): Promise<WeatherData> {
   if (!API_KEY) {
-    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your .env file');
+    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your Vercel environment variables (Settings → Environment Variables). See VERCEL_ENV_SETUP.md for instructions.');
   }
 
   // Utiliser directement l'API standard pour avoir toutes les données
@@ -349,7 +349,7 @@ export async function getCurrentWeather(city: string): Promise<WeatherData> {
 
 export async function getWeatherByCoords(lat: number, lon: number): Promise<WeatherData> {
   if (!API_KEY) {
-    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your .env file');
+    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your Vercel environment variables (Settings → Environment Variables). See VERCEL_ENV_SETUP.md for instructions.');
   }
 
   // Utiliser directement l'API standard pour avoir toutes les données
@@ -405,7 +405,7 @@ export interface ForecastData {
 // Fonction getForecast avec fallback vers API standards
 export async function getForecast(city: string): Promise<ForecastData> {
   if (!API_KEY) {
-    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your .env file');
+    throw new Error('OpenWeatherMap API key is missing. Please configure NEXT_PUBLIC_WEATHER_API_KEY in your Vercel environment variables (Settings → Environment Variables). See VERCEL_ENV_SETUP.md for instructions.');
   }
 
   // Essayer d'abord One Call, puis fallback vers API standards
