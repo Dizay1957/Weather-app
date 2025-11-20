@@ -1,144 +1,169 @@
-# Application Météo - Next.js avec One Call API 3.0
+# Weather App - Modern Weather Forecast
 
-Une application météo moderne et complète construite avec Next.js, TypeScript, et Tailwind CSS, utilisant l'API **One Call API 3.0** d'OpenWeatherMap.
+A beautiful and modern weather application built with Next.js, TypeScript, and Tailwind CSS, using OpenWeatherMap API.
 
-## Fonctionnalités
+![Weather App](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?style=for-the-badge&logo=tailwind-css)
 
-- 🌤️ Affichage de la météo en temps réel (données mises à jour toutes les 10 minutes)
-- 🔍 Recherche de villes avec géocodage automatique
-- 📍 Géolocalisation automatique
-- 📊 Prévisions horaires sur 24 heures
-- 📅 Prévisions quotidiennes sur 8 jours
-- ⚠️ Alertes météo gouvernementales (si disponibles)
-- 💾 Sauvegarde des emplacements dans la base de données
-- 🇫🇷 Interface entièrement en français
-- 🎨 Design moderne et responsive avec mode sombre
+## ✨ Features
 
-## Prérequis
+- 🌤️ **Real-time Weather Data** - Updated every 10 minutes
+- 🔍 **City Search** - Search for any city worldwide
+- 📍 **Geolocation** - Automatic location detection
+- 📊 **24-Hour Forecast** - Detailed hourly predictions
+- 📅 **8-Day Forecast** - Extended daily weather outlook
+- ⚠️ **Weather Alerts** - Government weather warnings (when available)
+- 💾 **Location History** - Save searched locations to database
+- 🎨 **Modern UI** - Beautiful glassmorphism design with dark theme
+- 📱 **Responsive** - Works perfectly on all devices
+
+## 🚀 Quick Start
+
+### Prerequisites
 
 - Node.js 18+ 
-- npm ou yarn
-- **Clé API OpenWeatherMap avec abonnement One Call API 3.0**
-  - Créez un compte sur [openweathermap.org](https://openweathermap.org/api)
-  - Abonnez-vous à **"One Call by Call"** (1,000 appels/jour gratuits)
-  - Obtenez votre clé API dans votre [tableau de bord](https://home.openweathermap.org/api_keys)
+- npm or yarn
+- **OpenWeatherMap API Key** (free at [openweathermap.org](https://openweathermap.org/api))
 
-## Installation
+### Installation
 
-1. Clonez le repository ou naviguez vers le dossier du projet
-
-2. Installez les dépendances :
-```bash
-npm install
-```
-
-3. Configurez les variables d'environnement :
-   - Créez un fichier `.env` à la racine
-   - Ajoutez votre clé API OpenWeatherMap :
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Dizay1957/Weather-app.git
+   cd Weather-app
    ```
-   NEXT_PUBLIC_WEATHER_API_KEY=votre_cle_api_ici
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   
+   Create a `.env` file in the root directory:
+   ```env
    DATABASE_URL="file:./dev.db"
+   NEXT_PUBLIC_WEATHER_API_KEY=your_openweathermap_api_key_here
+   ```
+   
+   Get your free API key:
+   - Visit [openweathermap.org/api](https://openweathermap.org/api)
+   - Create a free account
+   - Go to [API Keys](https://home.openweathermap.org/api_keys)
+   - Copy your API key
+
+4. **Initialize the database**
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev --name init
    ```
 
-4. Initialisez la base de données :
-```bash
-npx prisma generate
-npx prisma migrate dev --name init
-```
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-5. Lancez le serveur de développement :
-```bash
-npm run dev
-```
+6. **Open your browser**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-6. Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur
-
-## Structure du projet
+## 📁 Project Structure
 
 ```
 .
-├── app/                    # Pages et routes Next.js
-│   ├── api/               # Routes API
-│   │   ├── onecall/      # Route One Call API 3.0
-│   │   ├── weather/      # Route météo (compatibilité)
-│   │   ├── forecast/     # Route prévisions (compatibilité)
-│   │   └── locations/    # Gestion des emplacements
-│   ├── globals.css        # Styles globaux
-│   ├── layout.tsx         # Layout principal
-│   └── page.tsx           # Page d'accueil
-├── components/            # Composants React
-│   ├── WeatherCard.tsx    # Carte météo principale
-│   ├── DailyForecast.tsx  # Prévisions sur 8 jours
-│   ├── HourlyForecast.tsx # Prévisions horaires (24h)
-│   ├── WeatherAlerts.tsx  # Alertes météo
-│   └── SearchBar.tsx      # Barre de recherche
-├── lib/                   # Utilitaires
-│   ├── weather.ts         # Service API météo (One Call 3.0)
-│   └── db.ts              # Client Prisma
-└── prisma/                # Schéma de base de données
+├── app/                    # Next.js App Router
+│   ├── api/               # API Routes
+│   │   ├── onecall/      # One Call API 3.0 endpoint
+│   │   ├── weather/      # Current weather endpoint
+│   │   ├── forecast/     # Forecast endpoint
+│   │   └── locations/    # Location management
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── components/            # React Components
+│   ├── WeatherCard.tsx    # Main weather display
+│   ├── DailyForecast.tsx  # 8-day forecast
+│   ├── HourlyForecast.tsx # 24-hour forecast
+│   ├── WeatherAlerts.tsx  # Weather alerts
+│   └── SearchBar.tsx     # Search component
+├── lib/                   # Utilities
+│   ├── weather.ts         # Weather API service
+│   └── db.ts              # Prisma client
+└── prisma/                # Database schema
     └── schema.prisma
 ```
 
-## Technologies utilisées
+## 🛠️ Technologies
 
-- **Next.js 14** - Framework React avec App Router
-- **TypeScript** - Typage statique
-- **Tailwind CSS** - Styling moderne
-- **Prisma** - ORM pour la base de données
-- **SQLite** - Base de données légère
-- **Axios** - Client HTTP
-- **Lucide React** - Icônes modernes
-- **OpenWeatherMap One Call API 3.0** - Données météo complètes
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS** - Utility-first CSS framework
+- **Prisma** - Modern ORM for database
+- **SQLite** - Lightweight database
+- **Axios** - HTTP client
+- **Lucide React** - Beautiful icons
+- **OpenWeatherMap API** - Weather data provider
 
-## API Routes
+## 📡 API Routes
 
-### One Call API 3.0 (Recommandé)
-- `GET /api/onecall?city={ville}` - Données complètes par ville (current + hourly + daily + alerts)
-- `GET /api/onecall?lat={lat}&lon={lon}` - Données complètes par coordonnées
-- `GET /api/onecall?city={ville}&exclude=minutely,alerts` - Exclure certaines données
+### One Call API 3.0 (Recommended)
+- `GET /api/onecall?city={city}` - Complete weather data by city
+- `GET /api/onecall?lat={lat}&lon={lon}` - Complete weather data by coordinates
+- `GET /api/onecall?city={city}&exclude=minutely,alerts` - Exclude specific data
 
-### Routes de compatibilité (anciennes API)
-- `GET /api/weather?city={ville}` - Météo actuelle par ville
-- `GET /api/weather?lat={lat}&lon={lon}` - Météo actuelle par coordonnées
-- `GET /api/forecast?city={ville}` - Prévisions sur 5 jours
+### Standard API (Fallback)
+- `GET /api/weather?city={city}` - Current weather by city
+- `GET /api/weather?lat={lat}&lon={lon}` - Current weather by coordinates
+- `GET /api/forecast?city={city}` - 5-day forecast
 
-### Gestion des emplacements
-- `GET /api/locations` - Liste des emplacements sauvegardés
-- `POST /api/locations` - Sauvegarder un emplacement
+### Location Management
+- `GET /api/locations` - Get saved locations
+- `POST /api/locations` - Save a location
 
-## Fonctionnalités One Call API 3.0
+## 🎨 Design Features
 
-Cette application utilise la dernière version de l'API OpenWeatherMap qui offre :
+- **Glassmorphism** - Modern frosted glass effect
+- **Dark Theme** - Beautiful gradient background
+- **Smooth Animations** - Fade-in effects and transitions
+- **Responsive Grid** - Adapts to all screen sizes
+- **Interactive Cards** - Hover effects and visual feedback
 
-- **Données en temps réel** : Mises à jour toutes les 10 minutes
-- **Prévisions horaires** : 48 heures de prévisions détaillées
-- **Prévisions quotidiennes** : 8 jours de prévisions
-- **Prévisions minute par minute** : Précipitations pour l'heure à venir (optionnel)
-- **Alertes météo** : Alertes gouvernementales en temps réel
-- **Données historiques** : Accès aux données météo passées (fonctionnalité future)
+## 📝 One Call API 3.0
 
-## Abonnement One Call API 3.0
+This app uses OpenWeatherMap's One Call API 3.0 which provides:
 
-L'API One Call 3.0 utilise un modèle "pay-as-you-call" :
-- **Gratuit** : 1,000 appels/jour
-- Abonnement requis : Vous devez vous abonner à "One Call by Call" dans votre compte OpenWeatherMap
-- Pour plus d'informations : [One Call API 3.0 Documentation](https://openweathermap.org/api/one-call-3)
+- **Real-time data** - Updated every 10 minutes
+- **Hourly forecasts** - 48 hours of detailed predictions
+- **Daily forecasts** - 8 days of weather outlook
+- **Minute-by-minute** - Precipitation for the next hour (optional)
+- **Weather alerts** - Government warnings in real-time
 
-## Dépannage
+### Subscription
 
-**Erreur "Clé API invalide" ou "403 Forbidden"**
-- Vérifiez que votre compte est abonné à "One Call by Call"
-- Vérifiez que votre clé API est correcte dans le fichier `.env`
-- Redémarrez le serveur après avoir modifié `.env`
+One Call API 3.0 uses a "pay-as-you-call" model:
+- **Free tier**: 1,000 calls/day
+- Subscribe to "One Call by Call" in your OpenWeatherMap account
+- [Learn more](https://openweathermap.org/api/one-call-3)
 
-**Erreur "Ville non trouvée"**
-- Vérifiez l'orthographe du nom de la ville
-- Essayez avec le nom en anglais si la recherche en français ne fonctionne pas
+**Note**: The app automatically falls back to standard APIs if One Call 3.0 is not available.
 
-**Erreur de base de données**
-- Assurez-vous d'avoir exécuté `npx prisma generate` et `npx prisma migrate dev`
-- Vérifiez que le fichier `prisma/dev.db` existe
+## 🐛 Troubleshooting
 
-## Licence
+See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common issues and solutions.
 
-MIT
+## 📄 License
+
+MIT License - feel free to use this project for your own purposes!
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📧 Support
+
+If you encounter any issues, please open an issue on [GitHub](https://github.com/Dizay1957/Weather-app/issues).
+
+---
+
+Made with ❤️ using Next.js and OpenWeatherMap API
