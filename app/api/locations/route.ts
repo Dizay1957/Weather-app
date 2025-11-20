@@ -17,17 +17,27 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  // Parse body first so it's available in catch block
+  let body: { name?: string; latitude?: number; longitude?: number };
   try {
-    const body = await request.json();
-    const { name, latitude, longitude } = body;
+    body = await request.json();
+  } catch (parseError) {
+    return NextResponse.json(
+      { error: 'Invalid JSON in request body' },
+      { status: 400 }
+    );
+  }
 
-    if (!name || latitude === undefined || longitude === undefined) {
-      return NextResponse.json(
-        { error: 'Name, latitude and longitude required' },
-        { status: 400 }
-      );
-    }
+  const { name, latitude, longitude } = body;
 
+  if (!name || latitude === undefined || longitude === undefined) {
+    return NextResponse.json(
+      { error: 'Name, latitude and longitude required' },
+      { status: 400 }
+    );
+  }
+
+  try {
     const location = await prisma.location.create({
       data: {
         name,

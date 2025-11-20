@@ -123,6 +123,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchWeather(searchCity);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = (city: string) => {
