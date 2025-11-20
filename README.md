@@ -148,13 +148,35 @@ One Call API 3.0 uses a "pay-as-you-call" model:
 
 **Note**: The app automatically falls back to standard APIs if One Call 3.0 is not available.
 
+## 🚀 Deployment
+
+### Deploy to Vercel
+
+1. Push your code to GitHub
+2. Import your repository in [Vercel](https://vercel.com)
+3. Add environment variable in Vercel:
+   - Go to **Settings** → **Environment Variables**
+   - Add `NEXT_PUBLIC_WEATHER_API_KEY` with your API key
+   - Check all environments (Production, Preview, Development)
+4. Deploy!
+
+The app works on Vercel even without a database (location saving is optional).
+
 ## 🐛 Troubleshooting
 
-See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common issues and solutions.
+**API Key Error**: Make sure `NEXT_PUBLIC_WEATHER_API_KEY` is set in your environment variables (Vercel Settings → Environment Variables).
+
+**Database Error**: The app works without a database. Location saving is optional and won't affect weather functionality.
+
+**Build Errors**: Make sure all dependencies are installed and Prisma is generated (`npx prisma generate`).
 
 ## 📄 License
 
 MIT License - feel free to use this project for your own purposes!
+
+## 👤 Author
+
+**El Yazid** ([@Dizay1957](https://github.com/Dizay1957))
 
 ## 🤝 Contributing
 
@@ -166,4 +188,4 @@ If you encounter any issues, please open an issue on [GitHub](https://github.com
 
 ---
 
-Made with ❤️ using Next.js and OpenWeatherMap API
+Made with ❤️ by [@Dizay1957](https://github.com/Dizay1957) using Next.js and OpenWeatherMap API

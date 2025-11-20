@@ -93,8 +93,8 @@ export async function GET(request: NextRequest) {
     let useFallback = false;
     
     if (city) {
-      // Essayer directement les API standards d'abord (plus fiable)
-      // car elles acceptent le nom de la ville directement
+      // Use standard APIs first (more reliable)
+      // because they accept city names directly
       try {
         const standardWeather = await getCurrentWeather(city);
         let forecastData: any = null;
@@ -102,21 +102,21 @@ export async function GET(request: NextRequest) {
         try {
           forecastData = await getForecast(city);
         } catch (e) {
-          console.warn('Impossible de récupérer les prévisions:', e);
+          console.warn('Unable to fetch forecast:', e);
         }
         
-        // Essayer One Call API 3.0 si disponible (pour avoir plus de données)
+        // Try One Call API 3.0 if available (for more data)
         try {
           const coords = { lat: standardWeather.coord.lat, lon: standardWeather.coord.lon };
           const oneCallData = await getOneCallWeather(coords.lat, coords.lon);
           
-          // Si One Call fonctionne, l'utiliser
+          // If One Call works, use it
           return NextResponse.json({
             ...oneCallData,
             cityName: standardWeather.name,
           });
         } catch (oneCallError: any) {
-          // Si One Call échoue, utiliser les données standards converties
+          // If One Call fails, use converted standard data
           console.log('One Call API 3.0 not available, using standard APIs...');
           
           const convertedData = convertToOneCallFormat(standardWeather, forecastData, standardWeather.name);
@@ -128,7 +128,7 @@ export async function GET(request: NextRequest) {
           });
         }
       } catch (error) {
-        // Si même les API standards échouent, propager l'erreur
+        // If even standard APIs fail, propagate the error
         throw error;
       }
     } else if (lat && lon) {

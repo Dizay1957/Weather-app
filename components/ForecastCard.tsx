@@ -25,7 +25,7 @@ export default function ForecastCard({ forecast }: ForecastCardProps) {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+      return date.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' });
   };
 
   return (
