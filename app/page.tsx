@@ -167,16 +167,16 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-4 shadow-xl">
-            <MapPin className="w-10 h-10 text-blue-400" />
+        <div className="text-center mb-6 sm:mb-8 md:mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-3 sm:mb-4 shadow-xl">
+            <MapPin className="w-8 h-8 sm:w-10 sm:h-10 text-blue-400" />
           </div>
-          <h1 className="text-6xl font-extrabold mb-3 bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2 sm:mb-3 bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent px-2">
             Weather App
           </h1>
-          <p className="text-xl text-gray-300 font-light">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 font-light px-2">
             Real-time weather forecasts powered by OpenWeatherMap
           </p>
         </div>
@@ -187,11 +187,11 @@ export default function Home() {
         </div>
 
         {/* Location Button */}
-        <div className="mb-6 text-center">
+        <div className="mb-4 sm:mb-6 text-center">
           <button
             onClick={getCurrentLocation}
             disabled={loading}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl border border-white/20"
+            className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-white/10 active:bg-white/20 hover:bg-white/20 backdrop-blur-sm text-white rounded-full font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg active:scale-95 touch-manipulation text-sm sm:text-base"
           >
             <MapPin className="w-4 h-4" />
             Use My Location
@@ -200,23 +200,23 @@ export default function Home() {
 
         {/* Error Message */}
         {error && (
-          <div className="max-w-2xl mx-auto mb-8 p-4 bg-red-500/20 backdrop-blur-sm border border-red-500/50 text-red-100 rounded-xl flex items-center gap-3 shadow-lg">
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
-            <p>{error}</p>
+          <div className="max-w-2xl mx-auto mb-4 sm:mb-6 md:mb-8 p-3 sm:p-4 bg-red-500/20 backdrop-blur-sm border border-red-500/50 text-red-100 rounded-xl flex items-start gap-2 sm:gap-3 shadow-lg text-sm sm:text-base">
+            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+            <p className="break-words">{error}</p>
           </div>
         )}
 
         {/* Loading State */}
         {loading && !weatherData && (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-400 border-t-transparent shadow-lg"></div>
-            <p className="mt-6 text-gray-300 text-lg font-medium">Loading weather data...</p>
+          <div className="text-center py-12 sm:py-16 md:py-20">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-4 border-blue-400 border-t-transparent shadow-lg"></div>
+            <p className="mt-4 sm:mt-6 text-gray-300 text-base sm:text-lg font-medium">Loading weather data...</p>
           </div>
         )}
 
         {/* Weather Content */}
         {weatherData && (
-          <div className="space-y-6 animate-fade-in">
+          <div className="space-y-4 sm:space-y-6 animate-fade-in">
             <WeatherCard
               name={weatherData.cityName || 'Unknown Location'}
               temp={weatherData.current.temp}
