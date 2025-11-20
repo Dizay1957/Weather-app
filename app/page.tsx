@@ -96,7 +96,7 @@ export default function Home() {
       const data: OneCallData = await response.json();
       setWeatherData(data);
 
-      // Save location to database
+      // Save location to database (optional - app works without it)
       if (data.cityName) {
         try {
           await fetch('/api/locations', {
@@ -109,7 +109,8 @@ export default function Home() {
             }),
           });
         } catch (dbError) {
-          console.error('Error saving location:', dbError);
+          // Silently fail - database is optional
+          console.warn('Location not saved (database may be unavailable):', dbError);
         }
       }
     } catch (err) {
